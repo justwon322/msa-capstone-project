@@ -15,7 +15,6 @@ public class DeliveryStarted extends AbstractEvent {
     private String productName;
     private String productPrice;
     private String orderStatus;
-import lombok.Data;
 }
 
 
