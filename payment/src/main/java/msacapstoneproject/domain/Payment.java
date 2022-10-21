@@ -45,8 +45,8 @@ public class Payment  {
 
 
 
-        PaymentCanceled paymentCanceled = new PaymentCanceled(this);
-        paymentCanceled.publishAfterCommit();
+        // PaymentCanceled paymentCanceled = new PaymentCanceled(this);
+        // paymentCanceled.publishAfterCommit();
 
     }
 
@@ -55,6 +55,11 @@ public class Payment  {
         return paymentRepository;
     }
 
+    @PreRemove
+    public void onPreRemove(){
+        PaymentCanceled paymentCanceled = new PaymentCanceled(this);
+        paymentCanceled.publishAfterCommit();
+    }
 
 
 
@@ -76,7 +81,9 @@ public class Payment  {
 
          });
         */
-
+         repository().findByOrderId(orderCanceled.getId()).ifPresent(payment->{
+            repository().delete(payment);
+         });
         
     }
 

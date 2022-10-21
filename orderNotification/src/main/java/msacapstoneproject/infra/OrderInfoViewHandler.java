@@ -78,26 +78,7 @@ public class OrderInfoViewHandler {
             e.printStackTrace();
         }
     }
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenDeliveryCanceled_then_UPDATE_3(@Payload DeliveryCanceled deliveryCanceled) {
-        try {
-            if (!deliveryCanceled.validate()) return;
-                // view 객체 조회
-            Optional<OrderInfo> orderInfoOptional = orderInfoRepository.findById(Long.valueOf(deliveryCanceled.getOrderId()));
-
-            if( orderInfoOptional.isPresent()) {
-                 OrderInfo orderInfo = orderInfoOptional.get();
-            // view 객체에 이벤트의 eventDirectValue 를 set 함
-                orderInfo.setOrderStatus("DeliveryCanceled");    
-                // view 레파지 토리에 save
-                 orderInfoRepository.save(orderInfo);
-                }
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+    
     @StreamListener(KafkaProcessor.INPUT)
     public void whenPaymentApproved_then_UPDATE_4(@Payload PaymentApproved paymentApproved) {
         try {

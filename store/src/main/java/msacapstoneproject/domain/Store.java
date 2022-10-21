@@ -4,6 +4,9 @@ import msacapstoneproject.domain.DeliveryStarted;
 import msacapstoneproject.domain.DeliveryCanceled;
 import msacapstoneproject.StoreApplication;
 import javax.persistence.*;
+
+import org.springframework.beans.BeanUtils;
+
 import java.util.List;
 import lombok.Data;
 import java.util.Date;
@@ -28,7 +31,7 @@ public class Store  {
     
     
     
-    private String orderId;
+    private Long orderId;
     
     
     
@@ -69,8 +72,8 @@ public class Store  {
 
 
 
-        DeliveryCanceled deliveryCanceled = new DeliveryCanceled(this);
-        deliveryCanceled.publishAfterCommit();
+        // DeliveryCanceled deliveryCanceled = new DeliveryCanceled(this);
+        // deliveryCanceled.publishAfterCommit();
 
     }
 
@@ -83,6 +86,9 @@ public class Store  {
 
 
     public static void cancelDelivery(PaymentCanceled paymentCanceled){
+        repository().findByOrderId(paymentCanceled.getOrderId()).ifPresent(store->{
+            repository().delete(store);
+         });
 
         /** Example 1:  new item 
         Store store = new Store();
@@ -105,44 +111,19 @@ public class Store  {
     }
     public static void updateOrderList(PaymentApproved paymentApproved){
 
-        /** Example 1:  new item 
-        Store store = new Store();
-        repository().save(store);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(paymentApproved.get???()).ifPresent(store->{
-            
-            store // do something
+        repository().findById(paymentApproved.getOrderId()).ifPresent(store->{
+            store.setOrderStatus("결제승인됨");
             repository().save(store);
-
-
-         });
-        */
-
+        });
         
     }
     public static void updateOrderList(Ordered ordered){
 
-        /** Example 1:  new item 
         Store store = new Store();
+        BeanUtils.copyProperties(ordered, store);
+        store.setOrderId(ordered.getId());
         repository().save(store);
-
-        */
-
-        /** Example 2:  finding and process
         
-        repository().findById(ordered.get???()).ifPresent(store->{
-            
-            store // do something
-            repository().save(store);
-
-
-         });
-        */
-
         
     }
 
