@@ -9,7 +9,7 @@ import java.util.*;
 public class DeliveryStarted extends AbstractEvent {
 
     private Long id;
-    private String orderId;
+    private Long orderId;
     private String customerId;
     private String customerAddr;
     private String productName;

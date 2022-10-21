@@ -10,7 +10,7 @@ import lombok.*;
 public class PaymentCanceled extends AbstractEvent {
 
     private Long id;
-    private String orderId;
+    private Long orderId;
     private String orderStatus;
 
     public PaymentCanceled(Payment aggregate){
