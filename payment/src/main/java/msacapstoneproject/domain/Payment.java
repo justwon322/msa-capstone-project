@@ -39,11 +39,14 @@ public class Payment  {
     @PostPersist
     public void onPostPersist(){
 
-
         PaymentApproved paymentApproved = new PaymentApproved(this);
         paymentApproved.publishAfterCommit();
 
-
+        try {
+            Thread.currentThread().sleep((long) (400 + Math.random() * 220));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // PaymentCanceled paymentCanceled = new PaymentCanceled(this);
         // paymentCanceled.publishAfterCommit();
