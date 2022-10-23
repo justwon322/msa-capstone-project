@@ -5,7 +5,6 @@
 ## Table of contents
 - [서비스 시나리오](#서비스-시나리오)
 - Event Storming 결과
-<br>
 ---
 ### 서비스 시나리오
 배달의 민족 커버하기 - https://1sung.tistory.com/106
