@@ -5,6 +5,7 @@
 ## Table of contents
 - [서비스 시나리오](#서비스-시나리오)
 - [분석/설계](#분석/설계)
+- [체크포인트](#체크포인트)
 ---
 ### 서비스 시나리오
 배달의 민족 커버하기 - https://1sung.tistory.com/106
@@ -31,3 +32,22 @@
 
 ---
 ### 분석/설계
+
+---
+### 체크포인트
+---
+#### Saga(Pub/Sub)
+SAGA 패턴이란 마이크로서비스들끼리 이벤트를 주고 받아 특정 마이크로서비스에서의 작업이 실패하면 이전까지의 작업이 완료된 마이크서비스들에게 보상 (complemetary) 이벤트를 소싱함으로써 분산 환경에서 원자성(atomicity)을 보장하는 패턴
+- 주문이 발생할 경우(Order Service - ordered(event)) publish -> 주문 목록이 업데이트 된다. (Store - UpdateOrderList(Polish)) Subscribe
+- 주문이 취소될 경우(Order Service - ordercanceled(event)) publish -> 주문결제가 취소된다. (Payment - CancelPayment(Polish)) Subscribe
+<br>
+- 주문 생성
+<img width="960" alt="주문생성" src="https://user-images.githubusercontent.com/115772322/197435954-fa78862f-d1d2-4182-b40e-ba3b2b681d26.png">
+<br>
+- 주문 취소
+<img width="665" alt="주문취소" src="https://user-images.githubusercontent.com/115772322/197435970-62094945-e7f8-41b9-a25a-ae1c16983e1f.png">
+<br>
+- Kafka에 접속하여 이벤트 확인
+<img width="1186" alt="스크린샷 2022-10-24 오전 11 14 05" src="https://user-images.githubusercontent.com/115772322/197435566-e66e34ec-7267-4c46-a110-c1bc52610b90.png">
+
+
