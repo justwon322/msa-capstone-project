@@ -4,7 +4,7 @@
  - 평가포인트 : https://workflowy.com/s/c10811dfdb67/UhOZB2crKOhNPUYp#/fc30a50ea43b
 ## Table of contents
 - [서비스 시나리오](#서비스-시나리오)
-- Event Storming 결과
+- [분석/설계](#분석/설계)
 ---
 ### 서비스 시나리오
 배달의 민족 커버하기 - https://1sung.tistory.com/106
@@ -30,4 +30,4 @@
 배달상태가 바뀔때마다 카톡 등으로 알림을 줄 수 있어야 한다 Event driven
 
 ---
-
+### 분석/설계
